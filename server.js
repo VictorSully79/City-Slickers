@@ -27,9 +27,9 @@ const { response } = require('express');
 
 app.get('./data/location.json', getLocationData)
  
-function getLocationData () { 
-  let firstLocation = new Location (getLocationData, request.query);
-  response.send(firstLocation);
+function getLocationData (req, resp) { 
+  let firstLocation = new Location (getLocationData, req.query);
+  resp.send(firstLocation);
 }
 
 function Location(getLocationData, cityName) {
