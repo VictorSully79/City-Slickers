@@ -21,12 +21,22 @@ app.listen(PORT, console.log("server is on"));
 const weatherData = require('/weather/weather.js');
 const { response } = require('express');
  */
+//const getLocationData = ('/location.json');
 
 //==========================================================================
 
-app.get('/data/location.js', getLocationData)
+app.get('/data/location.json', getLocationData)
  
 function getLocationData () { 
   let firstLocation = new Location (getLocationData, request.query);
   response.send(firstLocation);
+}
+
+function Location(getLocationData, cityName) {
+  let city = Object.entries(cityName)[0][1];
+  this.search_query = city;
+  this.formatted_query = getLocationData[0].display_name;
+  this.lat = dataFromTheFile[0].lat;
+  this.lon = dataFromTheFile[0].lon;
+
 }
