@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 [
   {
     "place_id": "222943963",
@@ -19,3 +21,12 @@
     "icon": "https://locationiq.org/static/images/mapicons/poi_place_city.p.20.png"
   }
 ]
+
+app.get('/data/location.js', locationCallback);
+
+function locationCallback(req, resp){
+  console.log(displayedData);
+  let displayedLocation = new Location(dislplayedData, req.query);
+  resp.send(displayedLocation);
+
+}
