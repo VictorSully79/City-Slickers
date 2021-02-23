@@ -17,21 +17,21 @@ app.listen(PORT, console.log("server is on"));
 
 
 //-------------------Routes------------------------------------------
-/* const locationData = require('./data/location.js');
-const weatherData = require('/weather/weather.js');
+//const getLocationData = require('/data/location.json');
+//const weatherData = require('/weather/weather.js');
 const { response } = require('express');
- */
-//
+
+//const getLocationData = ('/location.json');
 
 //==========================================================================
 
-app.get('/data/location.json', getLocationData)
+app.get('./data/location.json', getLocationData)
  
 function getLocationData () { 
   let firstLocation = new Location (getLocationData, request.query);
   response.send(firstLocation);
 }
-console.log(firstLocation);
+
 function Location(getLocationData, cityName) {
   let city = Object.entries(cityName)[0][1];
   this.search_query = city;
