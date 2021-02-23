@@ -21,7 +21,7 @@ app.listen(PORT, console.log("server is on"));
 const weatherData = require('/weather/weather.js');
 const { response } = require('express');
  */
-//const getLocationData = ('/location.json');
+const getLocationData = ('/location.json');
 
 //==========================================================================
 
