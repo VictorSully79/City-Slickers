@@ -1,4 +1,3 @@
-const { response } = require("express");
 
 [
   {
@@ -20,13 +19,4 @@ const { response } = require("express");
     "importance": 0.61729106268039,
     "icon": "https://locationiq.org/static/images/mapicons/poi_place_city.p.20.png"
   }
-]
 
-app.get('/data/location.js', locationCallback);
-
-function locationCallback(req, resp){
-  console.log(displayedData);
-  let displayedLocation = new Location(dislplayedData, req.query);
-  resp.send(displayedLocation);
-
-}

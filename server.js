@@ -17,14 +17,16 @@ app.listen(PORT, console.log("server is on"));
 
 
 //-------------------Routes------------------------------------------
-const locationData = require('/data/location.js');
+/* const locationData = require('./data/location.js');
 const weatherData = require('/weather/weather.js');
 const { response } = require('express');
-
+ */
 
 //==========================================================================
 
-app.get('/data/location.js', getLocationData);{
+app.get('/data/location.js', getLocationData)
+ 
+function getLocationData () { 
   let firstLocation = new Location (getLocationData, request.query);
   response.send(firstLocation);
 }
