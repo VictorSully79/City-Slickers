@@ -22,22 +22,54 @@ app.listen(PORT, console.log("server is on"));
 //const express = require('express');
 
 //const locationData = require('.data/location.json');
+const locationData = require('./data/location.json');
 
 //==========================================================================
 
-app.get('./location.json', getLocationData);
+app.get('/location', getLocationData);
 
  
 function getLocationData (req, resp) { 
-  let firstLocation = new Location(locationData, req.query);
+  
+  const firstLocation = new Location(locationData, req.query.city);
   resp.send(firstLocation);
 }
 
 function Location(fileData, cityName) {
-  //let city = Object.entries(cityName)[0][1];
+  //let  = Object.entries(cityName)[0][1];
+  this.city = Object.entries(cityName)[0][1];
   this.search_query = cityName;
   this.formatted_query = fileData[0].display_name;
   this.latitude = fileData[0].lat;
-  this.longintude = fileData[0].lon;
+  this.longitude = fileData[0].lon;
 
 }
+//======================Weather==================
+
+function handleGetWeather(req, resp){
+  const output = [];
+
+  const dataFromTheFile = require('./data/weather.json');
+  for(let i = 0; i < dataFromTheFile.data.length; i++) {
+    output.push(new WebAuthnAssertion(dataFromTheFile.data[i]));
+  }
+  resp.send(output);
+}
+
+//================Weather Data Retrieval==============
+
+function Weather(data){
+  this.forecast = data.weather.description;
+  this.time = data.valid_date;
+}
+// app.get('/restaurants', handleGetRestaurants);
+
+// function handleGetRestaurants(req, resp){
+//   console.log('this is resp', resp);
+// const restaurantJSON = require('./data/restaruants.json');
+// const output = [];
+// for (let i = 0; i < nearby_restaurants.length; i++){
+//   output.push(new restaurantJSON(restaurantJSON.nearby_restaurants[i].restaurant));
+// }
+//   resp.send(output);
+// }
