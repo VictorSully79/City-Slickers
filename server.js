@@ -19,14 +19,17 @@ app.listen(PORT, console.log("server is on"));
 //-------------------Routes------------------------------------------
 //const getLocationData = require('/data/location.json');
 //const weatherData = require('/weather/weather.js');
-const { response } = require('express');
+//const express = require('express');
 
-const locationData = require('/location.json');
+//const locationData = require('.data/location.json');
 
 //==========================================================================
 
-app.get('/location.json', getLocationData);
- 
+app.get('./data/location.json', getLocationData);
+app.get('/', homefunction);
+function homefunction (req, resp){
+  console.log('inside homefunction')
+} 
 function getLocationData (req, resp) { 
   let firstLocation = new Location(locationData, req.query);
   resp.send(firstLocation);
