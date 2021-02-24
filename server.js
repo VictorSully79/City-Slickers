@@ -26,9 +26,7 @@ app.listen(PORT, console.log("server is on"));
 //==========================================================================
 
 app.get('./location.json', getLocationData);
-//app.get('/', homefunction);
-//function homefunction (req, resp){
-  //console.log('inside homefunction')
+
  
 function getLocationData (req, resp) { 
   let firstLocation = new Location(locationData, req.query);
@@ -36,10 +34,10 @@ function getLocationData (req, resp) {
 }
 
 function Location(fileData, cityName) {
-  let city = Object.entries(cityName)[0][1];
-  this.search_query = city;
+  //let city = Object.entries(cityName)[0][1];
+  this.search_query = cityName;
   this.formatted_query = fileData[0].display_name;
-  this.lat = fileData[0].lat;
-  this.lon = fileData[0].lon;
+  this.latitude = fileData[0].lat;
+  this.longintude = fileData[0].lon;
 
 }
