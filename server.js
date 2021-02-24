@@ -25,11 +25,11 @@ app.listen(PORT, console.log("server is on"));
 
 //==========================================================================
 
-app.get('./data/location.json', getLocationData);
-app.get('/', homefunction);
-function homefunction (req, resp){
-  console.log('inside homefunction')
-} 
+app.get('./location.json', getLocationData);
+//app.get('/', homefunction);
+//function homefunction (req, resp){
+  //console.log('inside homefunction')
+ 
 function getLocationData (req, resp) { 
   let firstLocation = new Location(locationData, req.query);
   resp.send(firstLocation);
