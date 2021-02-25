@@ -13,22 +13,33 @@ const PORT = process.env.PORT || 3009; // process.env is boilerplace the variabl
 
 app.use(cors()); // enables local processes to talk to the server // Cross Origin Resource Sharing
 app.listen(PORT, console.log (`server is on ${PORT}`))
-
+const GEO_API_KEY = process.env.GEO_API_KEY;
 
 //-------------------Routes------------------------------------------
-//const getLocationData = require('/data/location.json');
-//const weatherData = require('/weather/weather.js');
-//const express = require('express');
-
-//const locationData = require('.data/location.json');
 const locationData = require('./data/location.json');
-const weatherData = require('./data/weather.json');
+const weatherData = require('./data/weather.json');       
 //==========================================================================
-
 app.get('/location', getLocationData);
 
- 
+
 function getLocationData (req, resp) { 
+console.log('this is get location route', req);
+  //GET https://us1.locationiq.com/v1/search.php?key=YOUR_ACCESS_TOKEN&q=SEARCH_STRING&format=json
+var locationURL = 'https://us1.locationiq.com/v1/search.php';
+var locationQueryParam = {
+  key: GEO_API_KEY,
+  q: req.query.city,
+  format: 'json',
+  limit: 1
+};
+superAgent.get(locationURL)
+  .query(locationQueryParam)
+  .then(resultFromSuperAgent => {
+    console.log('this is resultFromSuperAgent: ', resultFromSuperAgent.body );
+  }
+
+  )
+
   
   const firstLocation = new Location(locationData, req.query.city);
   resp.send(firstLocation);
