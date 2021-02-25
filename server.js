@@ -13,7 +13,7 @@ app.use(cors()); // enables local processes to talk to the server // Cross Origi
 
 const PORT = process.env.PORT || 3009; // process.env is boilerplace the variable name is potato
 
-app.listen(PORT, console.log("server is on"));
+app.listen(PORT, console.log (`server is on ${PORT}`))
 
 
 //-------------------Routes------------------------------------------
@@ -23,7 +23,7 @@ app.listen(PORT, console.log("server is on"));
 
 //const locationData = require('.data/location.json');
 const locationData = require('./data/location.json');
-
+const weatherData = require('./data/weather.json');
 //==========================================================================
 
 app.get('/location', getLocationData);
@@ -36,7 +36,7 @@ function getLocationData (req, resp) {
 }
 
 function Location(fileData, cityName) {
-  //let  = Object.entries(cityName)[0][1];
+
   this.city = Object.entries(cityName)[0][1];
   this.search_query = cityName;
   this.formatted_query = fileData[0].display_name;
@@ -45,23 +45,41 @@ function Location(fileData, cityName) {
 
 }
 //======================Weather==================
+app.get('/weather', getWeather);
 
-function handleGetWeather(req, resp){
-  const output = [];
 
-  const dataFromTheFile = require('./data/weather.json');
-  for(let i = 0; i < dataFromTheFile.data.length; i++) {
-    output.push(new WebAuthnAssertion(dataFromTheFile.data[i]));
-  }
-  resp.send(output);
+function getWeather(req, resp){
+  const formattedWeatherData = weatherData.data.map(singleDayData => {
+     return new WeatherData(singleDayData);
+     
+  })
+  
+   console.log(formattedWeatherData);
+  resp.send(formattedWeatherData);
 }
+
+  
+function WeatherData(localWeather){
+  this.forecast = localWeather.weather.description;
+  this.time = localWeather.valid_date; 
+}
+
+  
+
+  
+
 
 //================Weather Data Retrieval==============
 
-function Weather(data){
-  this.forecast = data.weather.description;
-  this.time = data.valid_date;
-}
+
+  // {
+  //   "forecast": "Partly cloudy until afternoon.",
+  //   "time": "Mon Jan 01 2001"
+  // },
+  // {
+  //   "forecast": "Mostly cloudy in the morning.",
+  //   "time": "Tue Jan 02 2001"
+  // },
 // app.get('/restaurants', handleGetRestaurants);
 
 // function handleGetRestaurants(req, resp){
