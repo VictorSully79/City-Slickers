@@ -1,7 +1,7 @@
 // ============== Packages ==============================
 
 const express = require('express');
-const cors = require('cors'); // just kinda works and we need it
+// const cors = require('cors'); // just kinda works and we need it
 const superAgent = require('superagent');
 require('dotenv').config(); // read the `.env` file's saved env variables AFTER reading the terminal's real env's variables
 const pg = require('pg');
@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3009; // process.env is boilerplace the variabl
 const DATABASE_URL = process.env.DATABASE_URL
 const client = new pg.Client(DATABASE_URL);
 client.on('error', error => console.log(error));
-app.use(cors()); // enables local processes to talk to the server // Cross Origin Resource Sharing
+// app.use(cors()); // enables local processes to talk to the server // Cross Origin Resource Sharing
 
 const GEO_API_KEY = process.env.GEO_API_KEY;
 
